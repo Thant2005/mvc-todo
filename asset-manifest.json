@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/mvc-todo/static/css/main.e4f71028.css",
-    "main.js": "/mvc-todo/static/js/main.afa1c019.js",
+    "main.js": "/mvc-todo/static/js/main.c6e748f6.js",
     "index.html": "/mvc-todo/index.html",
     "main.e4f71028.css.map": "/mvc-todo/static/css/main.e4f71028.css.map",
-    "main.afa1c019.js.map": "/mvc-todo/static/js/main.afa1c019.js.map"
+    "main.c6e748f6.js.map": "/mvc-todo/static/js/main.c6e748f6.js.map"
   },
   "entrypoints": [
     "static/css/main.e4f71028.css",
-    "static/js/main.afa1c019.js"
+    "static/js/main.c6e748f6.js"
   ]
 }
