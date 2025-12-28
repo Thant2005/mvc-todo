@@ -10,23 +10,23 @@ function App() {
   let [todos, setTodos] = useState([]);
   let [filterTodo, setFilterTodo] = useState(todos);
   useEffect(() => {
-    fetch("http://localhost:5000/todos")
+    fetch("https://dummyjson.com/todos")
       .then((res) => res.json())
       .then((todos) => {
-        setTodos(todos);
-        setFilterTodo(todos);
+        setTodos(todos.todos);
+        setFilterTodo(todos.todos);
       });
   }, []);
   //client
   let addTodo = (todo) => {
     setTodos((prevState) => [...prevState, todo]);
     //server
-    fetch("http://localhost:5000/todos", {
+    fetch("https://dummyjson.com/todos", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(todo),
+      body: JSON.stringify({ todo }),
     });
   };
   let deleteTodo = (todoId) => {
@@ -37,7 +37,7 @@ function App() {
       });
     });
     //server
-    fetch(`http://localhost:5000/todos/${todoId}`, { method: "DELETE" });
+    fetch(`https://dummyjson.com/todos/${todoId}`, { method: "DELETE" });
   };
   let updateTodo = (todo) => {
     //client
@@ -49,12 +49,12 @@ function App() {
         return t;
       });
     });
-    fetch(`http://localhost:5000/todos/${todo.id}`, {
+    fetch(`https://dummyjson.com/todos/${todo.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(todo),
+      body: JSON.stringify({ todo }),
     });
   };
   let remaintinCount = todos.filter((t) => !t.completed).length;

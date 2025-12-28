@@ -6,7 +6,7 @@ export default function TodoForm({ addTodo }) {
     e.preventDefault();
     let todo = {
       id: Math.random(),
-      title: title,
+      todo: title,
       completed: false,
     };
     addTodo(todo);

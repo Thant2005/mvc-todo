@@ -2,12 +2,13 @@ import React, { useState } from "react";
 
 export default function Todo({ todo, deleteTodo, updateTodo }) {
   let [isEdit, setisEdit] = useState(false);
-  let [title, setTitle] = useState(todo.title);
+  let [title, setTitle] = useState(todo.todo);
+
   let updateHandler = (e) => {
     e.preventDefault();
     let upTodo = {
       id: todo.id,
-      title: title,
+      todo: title,
       completed: false,
     };
     updateTodo(upTodo);
@@ -16,7 +17,7 @@ export default function Todo({ todo, deleteTodo, updateTodo }) {
   let HandleCheckbox = (e) => {
     let upTodo = {
       id: todo.id,
-      title: title,
+      todo: title,
       completed: !todo.completed,
     };
     updateTodo(upTodo);
@@ -36,7 +37,7 @@ export default function Todo({ todo, deleteTodo, updateTodo }) {
               todo.completed ? "line-through" : ""
             }`}
           >
-            {todo.title}
+            {todo.todo}
           </span>
         )}
         {isEdit && (
