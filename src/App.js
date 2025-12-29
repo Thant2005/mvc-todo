@@ -10,51 +10,64 @@ function App() {
   let [todos, setTodos] = useState([]);
   let [filterTodo, setFilterTodo] = useState(todos);
   useEffect(() => {
-    fetch("https://dummyjson.com/todos")
+    fetch("https://695183cf70e1605a108a3ef6.mockapi.io/todos")
       .then((res) => res.json())
       .then((todos) => {
-        setTodos(todos.todos);
-        setFilterTodo(todos.todos);
+        setTodos(todos);
+        setFilterTodo(todos);
       });
   }, []);
   //client
   let addTodo = (todo) => {
-    setTodos((prevState) => [...prevState, todo]);
     //server
-    fetch("https://dummyjson.com/todos", {
+    fetch("https://695183cf70e1605a108a3ef6.mockapi.io/todos", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ todo }),
+      body: JSON.stringify(todo),
+    }).then((res) => {
+      if (res.ok) {
+        setTodos((prevState) => [...prevState, todo]);
+      }
     });
   };
   let deleteTodo = (todoId) => {
     //client
-    setTodos((prevState) => {
-      return prevState.filter((todo) => {
-        return todo.id !== todoId;
-      });
-    });
+
     //server
-    fetch(`https://dummyjson.com/todos/${todoId}`, { method: "DELETE" });
+    fetch(`https://695183cf70e1605a108a3ef6.mockapi.io/todos/${todoId}`, {
+      method: "DELETE",
+    }).then((res) => {
+      if (res.ok) {
+        setTodos((prevState) => {
+          return prevState.filter((todo) => {
+            return todo.id !== todoId;
+          });
+        });
+      }
+    });
   };
   let updateTodo = (todo) => {
     //client
-    setTodos((prevState) => {
-      return prevState.map((t) => {
-        if (t.id === todo.id) {
-          return todo;
-        }
-        return t;
-      });
-    });
-    fetch(`https://dummyjson.com/todos/${todo.id}`, {
-      method: "PATCH",
+
+    fetch(`https://695183cf70e1605a108a3ef6.mockapi.io/todos/${todo.id}`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ todo }),
+      body: JSON.stringify(todo),
+    }).then((res) => {
+      if (res.ok) {
+        setTodos((prevState) => {
+          return prevState.map((t) => {
+            if (t.id === todo.id) {
+              return todo;
+            }
+            return t;
+          });
+        });
+      }
     });
   };
   let remaintinCount = todos.filter((t) => !t.completed).length;
